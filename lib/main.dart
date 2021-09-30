@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:network_sample/ui/home_page.dart';
+import 'package:network_sample/ui/hw.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const Homework(),
     );
   }
 }

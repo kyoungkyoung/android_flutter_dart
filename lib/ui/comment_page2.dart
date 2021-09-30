@@ -62,7 +62,7 @@ class CommentPage2 extends StatelessWidget {
 
   Future<List<Comment>> fetchList(postId) async {
     final response = await http
-        .get('https://jsonplaceholder.typicode.com/comments?{postId=$postId}');
+        .get('https://jsonplaceholder.typicode.com/comments?postId={$postId}');
     Iterable jsonResponse = jsonDecode(response.body);
     List<Comment> list = jsonResponse.map((e) => Comment.fromJson(e)).toList();
     print('---------------------------');

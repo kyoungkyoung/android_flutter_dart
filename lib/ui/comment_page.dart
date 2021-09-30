@@ -5,7 +5,7 @@ import 'package:network_sample/model/comment.dart';
 import 'package:http/http.dart' as http;
 
 class CommentPage extends StatefulWidget {
-  int postId;
+  final int postId;
 
   CommentPage({
     Key key,
@@ -13,14 +13,13 @@ class CommentPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CommentPage> createState() => _CommentPageState(postId: postId);
+  State<CommentPage> createState() => _CommentPageState();
 }
 
 class _CommentPageState extends State<CommentPage> {
-  int postId;
   List<Comment> _commentList = [];
 
-  _CommentPageState({int postId});
+  _CommentPageState();
 
   @override
   void initState() {
@@ -29,7 +28,7 @@ class _CommentPageState extends State<CommentPage> {
   }
 
   Future<void> init() async {
-    List<Comment> list = await fetchList(postId);
+    List<Comment> list = await fetchList(widget.postId);
     print('==========================');
     print(list);
     setState(() {
@@ -48,9 +47,9 @@ class _CommentPageState extends State<CommentPage> {
       ),
       body: ListView(
         children: [
-          if (_commentList.isEmpty)
-            Center(child: CircularProgressIndicator())
-          else
+          // if (_commentList.isEmpty)
+          //   Center(child: CircularProgressIndicator())
+          // else
             ..._commentList.map((e) {
               return Container(
                 margin: EdgeInsets.all(8.0),
@@ -80,9 +79,9 @@ class _CommentPageState extends State<CommentPage> {
     );
   }
 
-  Future<List<Comment>> fetchList(postId) async {
+  Future<List<Comment>> fetchList(int postId) async {
     final response = await http
-        .get('https://jsonplaceholder.typicode.com/comments?{postId=${widget.postId}}');
+        .get('https://jsonplaceholder.typicode.com/comments?postId=${postId}');
     Iterable jsonResponse = jsonDecode(response.body);
     List<Comment> list = jsonResponse.map((e) => Comment.fromJson(e)).toList();
     print('---------------------------');

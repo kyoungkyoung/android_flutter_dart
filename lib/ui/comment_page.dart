@@ -29,12 +29,9 @@ class _CommentPageState extends State<CommentPage> {
 
   Future<void> init() async {
     List<Comment> list = await fetchList(widget.postId);
-    print('==========================');
     print(list);
     setState(() {
       _commentList = list;
-      print('_commentList=========================');
-      print(_commentList);
     });
   }
 
@@ -84,7 +81,6 @@ class _CommentPageState extends State<CommentPage> {
         .get('https://jsonplaceholder.typicode.com/comments?postId=${postId}');
     Iterable jsonResponse = jsonDecode(response.body);
     List<Comment> list = jsonResponse.map((e) => Comment.fromJson(e)).toList();
-    print('---------------------------');
     print(list);
     return list;
   }

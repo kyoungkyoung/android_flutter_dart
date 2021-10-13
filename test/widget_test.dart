@@ -9,31 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:network_sample/main.dart';
-import 'package:network_sample/model/comment.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 void main() {
-  Future<List<Comment>> fetchList(int postId) async {
-    final response = await http
-        .get('https://jsonplaceholder.typicode.com/comments?postId=${postId}');
-    Iterable jsonResponse = jsonDecode(response.body);
-    List<Comment> list = jsonResponse.map((e) => Comment.fromJson(e)).toList();
-    print('---------------------------');
-    print(list);
-    return list;
-  }
-
-
-
-
-  test('1번 Post의 Comment는 5개이어야 한다.', (){
-
-  });
-
-
-
-
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());

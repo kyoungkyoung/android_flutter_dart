@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:network_sample/model/post.dart';
 import 'package:network_sample/ui/comment_page.dart';
-import 'package:network_sample/ui/comment_page2.dart';
 
 class Homework extends StatefulWidget {
-  const Homework({Key key}) : super(key: key);
+  const Homework({Key? key}) : super(key: key);
 
   @override
   _HomeworkState createState() => _HomeworkState();
@@ -33,32 +32,33 @@ class _HomeworkState extends State<Homework> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Homework'),
+        title: const Text('Homework'),
         backgroundColor: Colors.orange,
       ),
       body: ListView(
         children: [
-          Padding(padding: EdgeInsets.all(16)),
+          const Padding(padding: EdgeInsets.all(16)),
           if (_postList.isEmpty)
-            Center(child: CircularProgressIndicator())
+            const Center(child: CircularProgressIndicator())
           else
             ..._postList.map((e) {
               return Card(
-                margin: EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 elevation: 5,
                 child: Column(
                   children: [
                     ListTile(
-                      onTap: () async{
+                      onTap: () async {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CommentPage(postId: e.id))
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CommentPage(postId: e.id)));
                       },
                       selectedTileColor: Colors.white,
                       tileColor: Colors.white,
                       // hoverColor: Colors.lightBlueAccent,
-                      leading: Icon(Icons.bookmark),
+                      leading: const Icon(Icons.bookmark),
                       title: Text(
                         e.title,
                         overflow: TextOverflow.ellipsis,
@@ -67,7 +67,7 @@ class _HomeworkState extends State<Homework> {
                         e.body,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      trailing: Icon(Icons.arrow_forward_outlined),
+                      trailing: const Icon(Icons.arrow_forward_outlined),
                     )
                   ],
                 ),
@@ -80,7 +80,7 @@ class _HomeworkState extends State<Homework> {
 
   Future<List<Post>> fetchList() async {
     final response =
-        await http.get('https://jsonplaceholder.typicode.com/posts');
+        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
     Iterable jsonResponse = jsonDecode(response.body);
     List<Post> list = jsonResponse.map((e) => Post.fromJson(e)).toList();
     return list;

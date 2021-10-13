@@ -1,25 +1,19 @@
-class Post{
-  int userId;
-  int id;
-  String title;
-  String body;
+class Post {
+  late int userId;
+  late int id;
+  late String title;
+  late String body;
 
-  Post({this.userId, this.id, this.title, this.body});
+  Post(
+      {required this.userId,
+      required this.id,
+      required this.title,
+      required this.body});
 
-  Post.fromJson(Map<String, dynamic> json){
+  Post.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     id = json['id'];
     title = json['title'];
     body = json['body'];
   }
-
-  // factory Post.fromJson(Map<String, dynamic> json) {
-  //   return Post(
-  //     userId: json['userId'],
-  //     id: json['id'],
-  //     title: json['title'],
-  //     body: json['body'],
-  //   );
-  // }
-
 }

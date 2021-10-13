@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:network_sample/model/todo.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _result = '';
-  //var _list = '';
   List<Todo> _list = [];
 
   //initState()는 최초에 로드 될 때, 한번 호출한다.
@@ -31,17 +30,16 @@ class _HomePageState extends State<HomePage> {
     });
 
     List<Todo> todos = await fetchList();
-    setState((){
+    setState(() {
       _list = todos;
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('네트워크 통신'),
+        title: const Text('네트워크 통신'),
       ),
       body: ListView(
         children: [
@@ -52,49 +50,42 @@ class _HomePageState extends State<HomePage> {
                 _result = todo.title;
               });
             },
-            child: Text('가져오기'),
+            child: const Text('가져오기'),
           ),
           Text(_result),
           ElevatedButton(
             onPressed: () async {
               List<Todo> todos = await fetchList();
-              setState((){
-                //_list = list.toString();
+              setState(() {
                 _list = todos;
               });
             },
-            child: Text('목록 가져오기'),
+            child: const Text('목록 가져오기'),
           ),
           //Text(_list),
-          if(_list.isEmpty)
-            Center(child: CircularProgressIndicator())
-          else ..._list.map((e) => Text(e.title)).toList(),
+          if (_list.isEmpty)
+            const Center(child: CircularProgressIndicator())
+          else
+            ..._list.map((e) => Text(e.title)).toList(),
         ],
       ),
     );
   }
 
   Future<Todo> fetch() async {
-    final response =
-        await http.get('https://jsonplaceholder.typicode.com/todos/1');
-    // print(response.statusCode);
-    // print(response.body);
+    final response = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/1'));
 
     Map<String, dynamic> jsonResponse = jsonDecode(response.body);
     Todo todo = Todo.fromJson(jsonResponse);
-    // print(todo); //Instance of 'Todo'
-    // print(todo.title);
-
     return todo;
   }
 
   Future<List<Todo>> fetchList() async {
     final response =
-        await http.get('https://jsonplaceholder.typicode.com/todos');
+        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/todos'));
     Iterable jsonResponse = jsonDecode(response.body);
     List<Todo> todos = jsonResponse.map((e) => Todo.fromJson(e)).toList();
-    print('-------------------------------');
-    print(todos);
     return todos;
   }
 }

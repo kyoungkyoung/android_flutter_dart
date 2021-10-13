@@ -7,10 +7,7 @@ import 'package:http/http.dart' as http;
 class CommentPage extends StatefulWidget {
   final int postId;
 
-  CommentPage({
-    Key key,
-    this.postId,
-  }) : super(key: key);
+  const CommentPage({Key? key, required this.postId}) : super(key: key);
 
   @override
   State<CommentPage> createState() => _CommentPageState();
@@ -29,7 +26,6 @@ class _CommentPageState extends State<CommentPage> {
 
   Future<void> init() async {
     List<Comment> list = await fetchList(widget.postId);
-    print(list);
     setState(() {
       _commentList = list;
     });
@@ -44,44 +40,38 @@ class _CommentPageState extends State<CommentPage> {
       ),
       body: ListView(
         children: [
-          // if (_commentList.isEmpty)
-          //   Center(child: CircularProgressIndicator())
-          // else
-            ..._commentList.map((e) {
-              return Container(
-                margin: EdgeInsets.all(8.0),
-                child:
-                  ListTile(
-                    leading: Icon(Icons.post_add),
-                    title: Text(e.name),
-                    subtitle: Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'email : ' +  e.email,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          'body : ' + e.body,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+          ..._commentList.map((e) {
+            return Container(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: const Icon(Icons.post_add),
+                title: Text(e.name),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'email : ' + e.email,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-              );
-            }).toList(),
+                    Text(
+                      'body : ' + e.body,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
         ],
       ),
     );
   }
 
   Future<List<Comment>> fetchList(int postId) async {
-    final response = await http
-        .get('https://jsonplaceholder.typicode.com/comments?postId=${postId}');
+    final response = await http.get(Uri.parse(
+        'https://jsonplaceholder.typicode.com/comments?postId=$postId'));
     Iterable jsonResponse = jsonDecode(response.body);
     List<Comment> list = jsonResponse.map((e) => Comment.fromJson(e)).toList();
-    print(list);
     return list;
   }
 }

@@ -1,4 +1,4 @@
-class Comment{
+class Comment {
   int postId;
   int id;
   String name;
@@ -7,7 +7,7 @@ class Comment{
 
   Comment({this.postId, this.id, this.name, this.email, this.body});
 
-  Comment.fromJson(Map<String, dynamic> json){
+  Comment.fromJson(Map<String, dynamic> json) {
     postId = json['postId'];
     id = json['id'];
     name = json['name'];
@@ -19,5 +19,4 @@ class Comment{
   String toString() {
     return 'Comment{postId: $postId, id: $id, name: $name, email: $email, body: $body}';
   }
-
 }

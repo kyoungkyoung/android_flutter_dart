@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 void main() {
+
   Future<List<Comment>> fetchList(int postId) async {
     final response = await http
         .get('https://jsonplaceholder.typicode.com/comments?postId=${postId}');
@@ -25,11 +26,16 @@ void main() {
   }
 
 
+  test('1번 Post의 Comment는 5개이어야 한다.', () async{
+    //테스트할 코드 내용 작성
 
+    // 테스트 실행
+   // final result = await fetchList(1);
+   List<Comment> result = await fetchList(1);
 
-  test('1번 Post의 Comment는 5개이어야 한다.', (){
-
-  });
+   // 테스트 검증
+    expect(result.length, 5);
+ });
 
 
 

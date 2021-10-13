@@ -1,4 +1,4 @@
-class Todo{
+class Todo {
   int userId;
   int id;
   String title;
@@ -6,7 +6,7 @@ class Todo{
 
   Todo({this.userId, this.id, this.title, this.completed});
 
-  Todo.fromJson(Map<String, dynamic> json){
+  Todo.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     id = json['id'];
     title = json['title'];
@@ -17,5 +17,4 @@ class Todo{
   String toString() {
     return 'Todo{userId: $userId, id: $id, title: $title, completed: $completed}';
   }
-
 }

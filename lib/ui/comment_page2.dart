@@ -8,8 +8,7 @@ class CommentPage2 extends StatelessWidget {
   final int postId;
   List<Comment> commentList;
 
-  CommentPage2({Key key, this.postId, this.commentList})
-      : super(key: key);
+  CommentPage2({Key key, this.postId, this.commentList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,6 @@ class CommentPage2 extends StatelessWidget {
             },
             child: Text('가져오기'),
           ),
-
         ],
       ),
     );

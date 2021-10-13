@@ -45,32 +45,31 @@ class _CommentPageState extends State<CommentPage> {
       body: ListView(
         children: [
           // if (_commentList.isEmpty)
-          //   Center(child: CircularProgressIndicator())
+          //   Center(child: CircularProgressIndicator())1
           // else
-            ..._commentList.map((e) {
-              return Container(
-                margin: EdgeInsets.all(8.0),
-                child:
-                  ListTile(
-                    leading: Icon(Icons.post_add),
-                    title: Text(e.name),
-                    subtitle: Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'email : ' +  e.email,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          'body : ' + e.body,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+          ..._commentList.map((e) {
+            return Container(
+              margin: EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.post_add),
+                title: Text(e.name),
+                subtitle: Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'email : ' + e.email,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-              );
-            }).toList(),
+                    Text(
+                      'body : ' + e.body,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
         ],
       ),
     );

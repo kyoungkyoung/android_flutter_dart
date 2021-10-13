@@ -49,11 +49,12 @@ class _HomeworkState extends State<Homework> {
                 child: Column(
                   children: [
                     ListTile(
-                      onTap: () async{
+                      onTap: () async {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CommentPage(postId: e.id))
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CommentPage(postId: e.id)));
                       },
                       selectedTileColor: Colors.white,
                       tileColor: Colors.white,
